@@ -4,7 +4,7 @@ services:
   influxdb:
     image: influxdb:2.1.1
     volumes:
-      - influxdb-storage:/var/lib/influxdb2:rw
+      - /portainer/Files/AppData/Config/influxdb2:/var/lib/influxdb2:rw
     env_file:
       - stack.env
     entrypoint: ["./entrypoint.sh"]
@@ -15,7 +15,7 @@ services:
   telegraf:
     image: telegraf:1.19
     volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+      - /portainer/Files/AppData/Config/telegraf/mytelegraf.conf:/etc/telegraf/telegraf.conf:rw
     env_file:
       - stack.env
     depends_on:
@@ -24,7 +24,7 @@ services:
   grafana:
     image: grafana/grafana-oss:8.4.3
     volumes:
-      - grafana-storage:/var/lib/grafana:rw
+      - /portainer/Files/AppData/Config/grafana/grafana-storage:/var/lib/grafana:rw
     depends_on:
       - influxdb
     ports:
