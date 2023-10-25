@@ -6,7 +6,7 @@ services:
     volumes:
       - influxdb-storage:/var/lib/influxdb2:rw
     env_file:
-      - stack.env
+      - .env
     entrypoint: ["./entrypoint.sh"]
     restart: on-failure:10
     ports:
@@ -15,9 +15,9 @@ services:
   telegraf:
     image: telegraf:1.19
     volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+      - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
     env_file:
-      - stack.env
+      - .env
     depends_on:
       - influxdb
 
